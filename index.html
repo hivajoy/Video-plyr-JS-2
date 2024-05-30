@@ -1,0 +1,39 @@
+document.addEventListener('DOMContentLoaded', () => {
+        const player = new Plyr('#player', {
+            controls: [
+                'play-large', // The large play button in the center
+                'rewind', // Rewind by the seek time (default 10 seconds)
+                'play', // Play/pause playback
+                'fast-forward', // Fast forward by the seek time (default 10 seconds)
+                'progress', // The progress bar and scrubber for playback and buffering
+                'current-time', // The current time of playback
+                'duration', // The full duration of the media
+                'captions', // Toggle captions
+                'settings', // Settings menu
+                'pip', // Picture-in-picture (currently Safari only)
+                'airplay', // Airplay (currently Safari only)
+                'fullscreen' // Toggle fullscreen
+            ],
+            seekTime: 10 // Define the seek time in seconds for rewind and fast forward
+        });
+
+// Buffering icon logic
+        const container = document.getElementById('container');
+        const bufferingIcon = container.querySelector('.buffering-icon');
+
+        player.on('playing', () => {
+            bufferingIcon.style.display = 'none';
+        });
+
+        player.on('waiting', () => {
+            bufferingIcon.style.display = 'block';
+        });
+
+        player.on('pause', () => {
+            bufferingIcon.style.display = 'none';
+        });
+
+        player.on('ended', () => {
+            bufferingIcon.style.display = 'none';
+        });
+    });
